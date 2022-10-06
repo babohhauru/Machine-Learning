@@ -1,6 +1,6 @@
 # Week2 Assignment Report
 
-### Dataset id:20--40--20 
+### Dataset id: 20--40--20 
 
 ## (a)
 
@@ -13,50 +13,43 @@ Visualised data graph
 </div>
 
 
-(i) The markers indicating each class are shown on the bottom left. The graph is also similar to that shown in the document. 
+(i) Using numpy to load the data set from the txt file, then visualize it by matplotlib. The markers indicating each class are shown on the bottom left. The graph is also similar to the graph in the  instruction document. 
 
 (ii) The decision boundary calculated by a logistic model can be written as:
 
 $$
 θ_0+θ_1x_1+θ_2x_2=0
 $$
-And we can get the coefficient set and the intercept: [-0.22837554 -3.78783103] and [-2.3368173], indicating:
+And we can get the coefficient set and the intercept: [-0.22839003 -3.78775839] and [-2.33715591], indicating:
 $$
-θ_0 = -2.3368173, θ_1 = -0.22837554 , θ_2 = -3.78783103
+θ_0 = -2.33715591, θ_1 = -0.22839003 , θ_2 = -3.78775839
 $$
 Thus, the boundary can be written as:
 $$
--0.22837554x_1-3.78783103x_2-2.3368173=0
+-0.22839003x_1-3.78775839x_2-2.33715591=0
 $$
-Then we can rewrite it to:
+Then we can rewrite the equation to:
 $$
-x_2=\frac{-2.3368173-0.22837554x_1}{3.78783103}
+x_2=\frac{-2.33715591-0.22839003x_1}{3.78775839}
 $$
 
 
-(iii) Then according to the equation above, we can obtain the following graph. The black line in the center is the decision boundary and all +1 predictions are above the boundary and all -1 predictions are below it.  And these circles with two colors mixed in them mean the prediction failed.
+(iii) Then according to the equation above, we can obtain the following graph. The black line in the center is the decision boundary and all +1 predictions are above the boundary and all -1 predictions are below it.  
 <div>
 <center>
 <img src="./decisionBoundary.png" alt="Figure2" style="zoom:100%;" />
 <br>
-decision boundary
+Decision Boundary
 </center> 
 </div>
 
 
-(iv) The decision boundary is linear but the dataset is non-linear, so the predictions can't match the labels. According to the distribution of the points, the boundary should be quadratic thus it's underfitting.
+
+(iv) The decision boundary is linear but the dataset is non-linear, Therefore, it is reasonable that the predictions failed to match the labels. According to the distribution of the points, the boundary should be quadratic thus it's underfitting. Thus instead of changing hyperparameters, it might be more efficient changing quadratic model. 
 
 ## (b)
 
-(i)&(ii) First we need to set a list of candidate values of 'C' : 0.001, 0.01, 1, 10, 100, 1000. For better comparison we also need to control the parameters, therefore, all parameters except 'C' are remaining the same during the experiment. And all graphs with accuracies shown below: 
-
-<div>
-<center>
-<img src="./diffC.png" alt="Figure3" style="zoom:100%;" />
-</center> 
-</div>
-
-(iii) From the questions(i)&(ii) we can also obtain new parameter values:
+(i) First we need to set a list of candidate values of 'C' : 0.001, 0.01, 1, 10, 100, 1000. Then we can use LinearSVC function from sklearn to train to obtain the new parameter values:
 $$
 When~C=0.001,θ_0=-0.36129384, θ_1=-0.00950201, θ_2=-0.33388834
 $$
@@ -81,9 +74,19 @@ $$
 When~C=1000,θ_0=-0.82768908, θ_1=-0.10234709, θ_2=-1.39035704
 $$
 
-The value of C will highly affect the penalty. According to the graph we got from question(i)&(ii) above shows the accuracy trend regarding the change of 'C'. 'C' stands for the regularization strength. A small C would allow the model to accept a smaller margin, if the margin can separate most of the points. On the other hand, a larger C would force the model to maximize the margin and may harm the classification performance. The SVM model can also reach the best performance with a medium value of C, which aids the model to avoid overfitting or underfitting.
+(ii) For better comparison we also need to control the hyperparameters, therefore, all hyperparameters except 'C' are remaining the same during the experiment. And generate a plot with several subplots to visualize the result, in addition, different 'C' will be evaluated by the 'score' function which calculated the mean accurary measured with the given dataset.  
 
-(iv) The shape of the boundaries are similar. The value of C brings large differences to the model's accuracy on the same dataset. However, this parameter has little effect on the logistic regression model.
+<div>
+<center>
+<img src="./diffC.png" alt="Figure3" style="zoom:100%;" />
+<br>
+Different 'C' values with their accuracies
+</center> 
+</div>
+
+(iii) From the questions(i)&(ii) we can know that the value of C will highly affect the decision boundary. According to the graph we got from question (ii) above shows the accuracy trend regarding the change of 'C'. 'C' stands for the regularization strength. A small C would allow the model to accept a smaller margin, if the margin can separate most of the points. On the other hand, a larger C would force the model to maximize the margin and may harm the classification performance. The SVM model can also reach the best performance with a medium value of C, which aids the model to avoid overfitting or underfitting.
+
+(iv) The shape of the boundaries are similar. The value of C brings large differences to the model's accuracy on the same dataset. However, this hyperparameter has little effect on the logistic regression model.
 
 ## (c)
 
@@ -91,7 +94,7 @@ The value of C will highly affect the penalty. According to the graph we got fro
 $$
 θ_0+θ_1x_1+θ_2x_2+θ_3x_1^2+θ_4x_2^2=0
 $$
-Then we can use the the same classifier from the first question to get the new parameters:
+Then we can use the the same classifier from the first question to obtain the new hyperparameters:
 $$
 θ_0=-0.84932739, θ_1=-0.26351517, θ_2=-5.58914409, θ_3=-8.05352584, θ_4=0.03097916
 $$
