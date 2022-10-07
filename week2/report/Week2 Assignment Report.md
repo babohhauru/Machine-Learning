@@ -20,7 +20,7 @@ Visualised data graph
 $$
 θ_0+θ_1x_1+θ_2x_2=0
 $$
-And we can get the coefficient set and the intercept: [0.08619205 5.06610909] and [1.78829503], indicating:
+And we need to do the training by using sklearn’s LogisticRegression function, in addition, set solver to 'saga' as the 'saga' can be faster for large dataset. Then we can get the coefficient set and the intercept: [0.08619205 5.06610909] and [1.78829503], indicating:
 $$
 θ_0 = 1.78829503, θ_1 = 0.08619205, θ_2 = 5.06610909
 $$
@@ -48,7 +48,7 @@ Decision Boundary
 </div>
 
 
-(iv) The decision boundary is linear but the dataset is non-linear, therefore, it is reasonable that the predictions failed to match the labels. According to the distribution of the points, the boundary should be quadratic so it might be underfitting. Thus instead of changing hyperparameters, it might be more efficient changing quadratic model. 
+(iv) The decision boundary is linear but the dataset is non-linear, therefore, it is reasonable that the predictions failed to match the labels. According to the distribution of the points, the boundary should be quadratic. Thus instead of changing hyperparameters, it might be more efficient changing to a quadratic model. 
 
 
 
@@ -79,7 +79,7 @@ $$
 When~C=1000,θ_0=0.65413465, θ_1=0.0166215, θ_2=1.86806845
 $$
 
-(ii) For better comparison we also need to control the hyperparameters, therefore, all hyperparameters except 'C' are remaining the same during the experiment. And then we generate a plot with several subplots to visualize the results, in addition, different 'C' will be evaluated by the 'score' function which calculated the mean accuracy measured with the given dataset to get the accuracies.  
+(ii) For better comparison we also need to control the hyperparameters, therefore, all hyperparameters except 'C' are remaining the same during the experiment. And then we generate a plot with several subplots to visualize the results, besides, different 'C' will be evaluated by the 'score' function which calculated the mean accuracy measured with the given dataset to get the accuracies.  
 
 
 
@@ -94,7 +94,7 @@ Different 'C' values with their accuracies
 
 (iii) From the questions(i)&(ii) we can know that the value of C will affect the decision boundary. According to the graph we got from question (ii) above shows the accuracy trend regarding the change of 'C'. 'C' stands for the regularization strength. A small C would allow the model to accept a smaller margin, if the margin can separate most of the points. On the other hand, a larger C would force the model to maximize the margin and may harm the classification performance. The SVM model can also reach the best performance with a medium value of C, which also helps the model to avoid overfitting or underfitting.
 
-(iv) The shape of the boundaries are similar. The value of C brings large differences to the model's accuracy on the same dataset. However, this hyperparameter has little effect on the logistic regression model.
+(iv) The shape of the boundaries are similar due to the linearity. The value of C brings big differences to the model's accuracy on the same dataset. However, this hyperparameter has little effect on the logistic regression model.
 
 
 
@@ -121,7 +121,7 @@ Visualised data graph with new features
 
 
 
-(ii)&(iii) Then we can get the new graph as shown above. The results predicted by the model are different from the former models. It is apparent that the shape of the decision boundaries vary, but it is difficult to calculate the boundary of a quadratic model.  In addition, we can get the accuracy by 'score' function and the accuracy of this model is 0.96096, much higher than the linear model trained with the same hyperparameters. 
+(ii)&(iii) Then we can get the new graph as shown above. The results predicted by the new model are different from the former models. It is apparent that it is difficult to calculate the boundary of a quadratic model.  In addition, we can get the accuracy by 'score' function and the accuracy of this model is 0.96096, much higher than the linear model trained with the same hyperparameters. 
 
 
 
@@ -146,7 +146,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn import svm
 # id: 6-6-6    
 
-#(a) (i)
 # load the dataset
 file = open('week2.txt', 'r') 
 data = np.array([line.strip().split(',') for line in file.readlines()]).astype(float)
@@ -164,7 +163,7 @@ plt.xlabel('x_1')
 plt.ylabel('x_2')
 plt.show()
 
-#(a) (ii)
+# Using sklearn’s LogisticRegression function to train
 clf = LogisticRegression(solver='saga').fit(x, y)
 pred = clf.predict(x)
 pred_index1 = [i for i in range(len(y)) if pred[i] == 1]
@@ -177,7 +176,6 @@ intercept = clf.intercept_
 print(coef)
 print(intercept)
 
-#(a) (iii)
 # Obtain the decision boundary
 x1 = np.linspace(-1, 1, 10)
 x2 = (-intercept-x1*coef[0])/coef[1]
@@ -196,7 +194,6 @@ plt.xlabel('x_1')
 plt.ylabel('x_2')
 plt.show()
 
-#(b) (i)&(ii)
 penalties = [0.001, 0.01, 1, 10, 100, 1000]
 accuracies = []
 plt.figure(figsize=[20, 20])
@@ -238,7 +235,6 @@ for index in np.arange(len(penalties))+1:
 plt.tight_layout()
 plt.show()
 
-#(c) (i)
 # Add additional features
 x_quad = np.concatenate(([x[:, 0]], [x[:, 1]], [x[:, 0]**2], [x[:, 1]**2])).T
 # Fit the model
@@ -252,10 +248,10 @@ print(intercept)
 print(coef)
 print(score)
 
-#(c) (ii)
 pred = clf.predict(x_quad)
 pred_index1 = [i for i in range(len(y)) if pred[i] == 1]
 pred_index2 = [i for i in range(len(y)) if pred[i] == -1]
+
 # Visualize the result
 plt.figure()
 plt.scatter(x[index1, 0], x[index1, 1], color='blue', label='y=1', alpha=0.5)
