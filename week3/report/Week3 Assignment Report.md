@@ -4,33 +4,78 @@
 
 ## (i)
 
+(a) The 3D scatter plot below is the graph of the visualized dataset, and we can tell that those data points look like lying on a curve. 
+
 <div> 
 <center>
-<img src="./dataVisualize.png" alt="Figure1" style="zoom:80%;" />
+<img src="./dataVisualize.png" alt="Figure1" style="zoom:70%;" />
 <br>
 Visualized dataset graph
 </center>
 </div> 
 
-(a) The 3D scatter plot above is the graph of the visualized dataset, and we can tell that those data points look like lying on a curve. 
-
-(b) For reproduction, we fixed the random state to 0, and the list of C used for the experiment is [0.1, 1, 10, 100, 1000, 10000, 100000]. For better visualization, we generated a plot to find out the trend of the trained parameters
+(b) For reproduction, we fixed the random state to 0, and the list of C used for the experiment is [0.1, 1, 5, 10, 100, 500, 1000]. For better observation, we could generate a plot as below to find out the trend of the trained parameters
 
 <div> 
 <center>
-<img src="./ParaB.png" alt="Figure2" style="zoom:80%;" />
+<img src="./ParaB.png" alt="Figure2" style="zoom:70%;" />
 </center>
 </div>
 
-The plot shows that the parameter set is no longer an array of zeros when C is larger than 1. As the value of C increases, the value of alpha decreases, which indicates a decrease in the strength of the penalty. We can notice that there are two parameters varied from 0 when C increased to 1, and the corresponding variables are  X<sub>0</sub> and X<sub>1</sub> . The other parameters remained to be 0 until C is larger than 100. Lasso regression restricts the redundant parameters, therefore the value of the parameters would have larger differences as the value of C increases. 
+And we can also obtain the parameter values:
+$$
+When \ C \ is \ 0.1, \ θ \ is\quad[ 0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. \\-0. -0. -0. -0. -0.
+ -0. -0. -0.]
+$$
 
+$$
+When \ C \ is \ 1,\ θ \ is \quad [ 0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0. -0.
+ \\-0. -0. -0.]
+$$
 
+$$
+When \ C \ is \ 5,\ θ \ is \quad [ 0.         -0.         -0.6803929  -0.93108058 -0.         -0.
+ -0.         -0.         -0.         -0.         -0.         -0.
+ -0.          0.         -0.         -0.    \\     -0.         -0. 
+ -0.         -0.         -0.        ]
+$$
+
+$$
+When \ C \ is \ 10,\ θ \ is \quad [ 0.         -0.         -0.86594124 -1.50202448 -0.         -0.
+ -0.         -0.         -0.         -0.         -0.         -0.
+ -0.          0.         -0.         -0.     \\    -0.         -0.
+ -0.         -0.         -0.        ]
+$$
+
+$$
+When \ C \ is \ 100,\ θ \ is \quad [ 0.          0.         -1.0327641  -2.01518063 \quad 0.         -0.
+  0.         -0.         -0.         -0.         -0.          0.
+ -0.          0.         -0.01732189 \quad 0.   \\      -0.         -0.
+ -0.         -0.         -0.        ]
+$$
+
+$$
+When \ C \ is \ 500,\ θ \ is \quad [ 0.     \quad    -0.01588659\quad -1.04777666 \quad-2.06265978 \quad-0.00801926\quad -0.\quad
+  0.     \quad  -0.     \quad   \\  0.      \quad    0.     \quad    -0.      \quad   -0.\quad
+ -0.        \quad  0.02595579  -0.06479348 \quad 0.05275606\quad  0.  \quad       -0.\quad
+  0.      \quad    0.    \quad      0.    \quad    ]
+$$
+
+$$
+When \ C \ is \ 1000,\ θ \ is \quad [ 0.    \quad     -0.03061585\quad -1.05258724\quad -2.06786679 \quad-0.07360959\quad -0.\quad
+ -0.    \quad    \\ -0.   \quad       0.      \quad    0.      \quad    0.      \quad   -0.\quad
+ -0.      \quad    0.11961047  -0.06866554\quad  0.07756016 \quad 0.0085111  \quad-0.00577164\quad\\
+  0.        \quad  0.01181523 \quad 0.        ]
+$$
+
+​	According to the plot and all values we can know that the parameter set is no longer an array of zeros when C is larger than 100. As the value of C increases, the value of alpha decreases, which indicates a decrease in the strength of the penalty. We can notice that there are two parameters varied from 0 when C increased to 1, and the corresponding variables are  X<sub>0</sub> and X<sub>1</sub> . The other parameters remained to be 0 until C is larger than 100. Lasso regression restricts the redundant parameters, therefore the value of the parameters would have larger differences as the value of C increases. 
 
 <div> 
 <center>
-<img src="./1c.png" alt="Figure3" style="zoom:70%;" />
+<img src="./1c.png" alt="Figure3" style="zoom:60%;" />
 </center>
 </div>
+
 
 (c)  By using the test grid, a prediction surface is generated. The training samples proffer our knowledge about the real labels, therefore a good fit is equal to the training samples lying on the prediction surface. For better visualization, we generated a grid from -2 to 2. We are expecting a curvy surface, and from the graph, we can assert setting C to 1000 gives us a good fit. On the other hand, when C is less than 1, the model failed to fit. Another piece of evidence is that all the parameters are 0 when C is too small. However, when C is too large, the surface becomes too curvy that it may lose generalizability. 
 
@@ -43,14 +88,68 @@ The plot shows that the parameter set is no longer an array of zeros when C is l
 <img src="./1e1.png" alt="Figure4" style="zoom:80%;" />
 </center>
 </div>
+And the new parameter values are:
+$$
+When \ C \ is \ 0.1, \ θ \ is\quad[ 0.00000000e+00\quad -1.35443455e-02 \quad-7.72295230e-01 \quad-1.06042172e+00\quad \\
+ -1.73953142e-02  \quad2.36536033e-02 \quad 3.49005858e-04\quad -1.13203264e-01\quad \\
+  2.22749144e-03\quad -2.15522438e-01\quad -7.26509218e-01\quad -1.01561510e-03\quad \\
+ -2.40102839e-01 \quad 5.95142371e-02 \quad-2.46576227e-02\quad  3.28310760e-02\quad \\
+ -1.95283989e-03\quad -1.92436108e-02 \quad 1.28663919e-02\quad  2.99070616e-04\quad\\
+ -6.03935024e-02]
+$$
+
+$$
+When \ C \ is \ 1, \ θ \ is\quad[ 0.     \quad    -0.03430445 \quad-0.98140241\quad -1.67284647\\ -0.08498967\quad  0.05909102\quad
+ -0.05934594\quad -0.17358945 \\ 0.02224946\quad -0.10741457 \quad-0.36843846\quad -0.012031\quad
+ -0.12367714 \\ 0.13116568 \quad-0.10021716 \quad 0.16401253 \quad 0.15727365\\ -0.09720448\quad
+  0.08616842 \quad 0.08903423 \quad 0.0390254 ]
+$$
+
+$$
+When \ C \ is \ 5, \ θ \ is\quad[ 0.    \quad     -0.01395622\quad -1.01723555 \quad-2.02522765\\ -0.11872868\quad  0.07355937\quad
+ -0.22083621 \quad-0.28666379 \\ 0.05928066 \quad-0.03792016\quad -0.03675915\quad -0.00815416\\
+ -0.010702  \quad  0.17285026 \quad-0.15870678\quad  0.34897015\\  0.30222519\quad -0.28542038\quad
+  0.06690963  \quad0.17782774 \quad 0.02289217]
+$$
+
+$$
+When \ C \ is \ 10, \ θ \ is\quad[ 0.00000000e+00 \quad -1.51879825e-03 \quad\quad-1.02348816e+00 \quad-2.09869399e+00\\
+ -1.25462380e-01 \quad7.92020314e-02 \quad-2.99569101e-01\quad -3.23372278e-01\\
+  8.04836522e-02 \quad-1.47928909e-02 \quad 3.48722768e-02\quad -7.15485976e-03\\
+  1.41289788e-02 \quad 1.80282916e-01 \quad-1.74950287e-01  \quad4.31091674e-01\\
+  3.49754662e-01\quad -3.47382789e-01 \quad 5.58604187e-02 \quad 1.96717906e-01\quad
+  1.13612031e-02]
+$$
+
+$$
+When \ C \ is \ 100, \ θ \ is\quad[ 0.    \quad      0.0217433 \quad -1.03063356 \quad-2.1738563 \\ -0.13158415\quad  0.0889344\quad
+ -0.43429515 \quad-0.37118123 \\ 0.11402893 \quad 0.01777021 \quad 0.10916822 \quad-0.00761001\\
+  0.03840823 \quad 0.1866018 \quad -0.19606643 \quad 0.56495584  \\0.41316301\quad -0.42302845\quad
+  0.03898079 \quad 0.2121067 \quad -0.00718717]
+$$
+
+$$
+When \ C \ is \ 500, \ θ \ is\quad[ 0.     \quad     0.02496879 \quad-1.03138933 \quad-2.18092874\\ -0.13207718\quad  0.09022909\quad
+ -0.45211536\quad -0.37650491 \\ 0.11809316 \quad 0.02156698 \quad 0.11623946\quad -0.00782888\\
+  0.04053139 \quad 0.18708215\quad -0.19845792 \quad 0.5821984  \\ 0.42034003\quad -0.43090249\quad
+  0.03694362\quad  0.21315735 \quad-0.00946407]
+$$
+
+$$
+When \ C \ is \ 1000, \ θ \ is\quad[ 0.      \quad    0.02539244\quad -1.03148562\quad -2.18181649 \\-0.13213753 \quad 0.09039832\quad
+ -0.45444362\quad -0.37718674 \\ 0.11861722 \quad 0.02205522\quad  0.1171284 \quad -0.00785973\\
+  0.04079462 \quad 0.18714048 \quad-0.19876509 \quad 0.58444459 \\ 0.42126088 \quad-0.43190095\quad
+  0.03668072 \quad 0.21328246 \quad-0.00975813]
+$$
 
 The this graph contains subplots showing the prediction surfaces. A good fit is reached when C is larger than 1 but less than 10:
 
 <div> 
 <center>
-<img src="./1e.png" alt="Figure5" style="zoom:80%;" />
+<img src="./1e.png" alt="Figure5" style="zoom:70%;" />
 </center>
 </div>
+
 
 
 
@@ -76,6 +175,19 @@ The this graph contains subplots showing the prediction surfaces. A good fit is 
 </center>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Appendix
 
 ```python
@@ -87,7 +199,8 @@ from sklearn import linear_model
 from sklearn.model_selection import KFold
 from sklearn.metrics import mean_squared_error
 from matplotlib.ticker import LinearLocator
-# Data id:14--28--14 
+
+# Data id:14--28--14  
 
 # Load the data
 file = open("week3.txt", "r")
@@ -118,13 +231,14 @@ names = poly.get_feature_names_out()
 
 # Train a list of models
 parameters = []
-c_list = [0.1, 1, 10, 100, 1000, 10000, 100000]
+c_list = [0.1, 1, 5, 10, 100, 500, 1000]
 for c in c_list:
     # Transfer C to alpha
     alpha = 1/(2*c)
     clf = linear_model.Lasso(random_state=0, alpha=alpha)
     clf.fit(poly_X, y)
     parameters.append(clf.coef_)
+    print("C is", c ,clf.coef_)
     
 parameters = np.array(parameters).T
 
@@ -151,7 +265,7 @@ Xtest = np.array(Xtest)
 poly_Xtest = poly.fit_transform(Xtest)
 
 # Train a list of models and make predictions
-c_list = [0.1, 1, 10, 100, 1000, 10000, 100000]
+c_list = [0.1, 1, 5, 10, 100, 500, 1000]
 predictions = []
 for c in c_list:
     # Transfer C to alpha
@@ -178,7 +292,7 @@ plt.show()
 # Train a list of models, capture the parameters and predictions
 parameters = []
 predictions = []
-c_list = [0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]
+c_list = [0.1, 1, 5, 10, 100, 500, 1000]
 for c in c_list:
     # Transfer C to alpha
     alpha = 1/(2*c)
@@ -186,6 +300,7 @@ for c in c_list:
     clf.fit(poly_X, y)
     parameters.append(clf.coef_)
     predictions.append(clf.predict(poly_Xtest))
+    print("C is", c ,clf.coef_)
     
 parameters = np.array(parameters).T
 
@@ -197,7 +312,7 @@ for i in range(len(parameters)):
 plt.xlabel("C")
 plt.xticks(np.arange(len(c_list)), c_list)
 plt.ylabel("Value")
-plt.legend(loc='upper left')
+plt.legend(loc='upper right')
 plt.show()
 
 # Generate the graphs (predictions)
@@ -216,7 +331,7 @@ for i in range(len(c_list)):
 plt.show()
 
 # A list of C
-c_list = [0.1, 1, 10, 100, 1000, 10000, 100000]
+c_list = [0.1, 1, 5, 10, 100, 500, 1000]
 
 # Create k folds
 kf = KFold(5, shuffle=True, random_state=0)
@@ -245,11 +360,11 @@ plt.errorbar(np.arange(len(c_list)), means, stds)
 plt.xticks(np.arange(len(c_list)), c_list)
 plt.xlabel("C")
 plt.ylabel("Value")
-plt.title("Mean and Standard Deviation of MSE vs C")
+plt.title("Mean and Standard Deviation of MSE vs C (Lasso)")
 plt.show()
 
 # A list of C
-c_list = [0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]
+c_list = [0.1, 1, 5, 10, 100, 500, 1000]
 
 # Create k folds
 kf = KFold(5, shuffle=True, random_state=0)
@@ -278,7 +393,7 @@ plt.errorbar(np.arange(len(c_list)), means, stds)
 plt.xticks(np.arange(len(c_list)), c_list)
 plt.xlabel("C")
 plt.ylabel("Value")
-plt.title("Mean and Standard Deviation of MSE vs C")
+plt.title("Mean and Standard Deviation of MSE vs C (Ridge)")
 plt.show()
 ```
 
