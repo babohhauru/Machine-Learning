@@ -8,13 +8,21 @@
 
 <div> 
 <center>
-<img src="./dataVisualize.png" alt="Figure1" style="zoom:70%;" />
-<br>
-Visualized dataset graph
+<img src="./dataVisualize.png" alt="Figure1" style="zoom:80%;" />
 </center>
 </div> 
 
-(b) For reproduction, we fixed the random state to 0, and the list of C used for the experiment is [0.1, 1, 5, 10, 100, 500, 1000]. For better observation, we could generate a plot as below to find out the trend of the trained parameters
+
+
+(b) For reproduction, we fixed the random state to 0, and the list of C used for the experiment is [0.1, 1, 5, 10, 100, 500, 1000]. Then for better observation, we could generate a plot as below to find out the trend of the trained parameters
+
+```python
+c_list = [0.1, 1, 5, 10, 100, 500, 1000]
+alpha = 1/(2*c)
+clf = linear_model.Lasso(random_state=0, alpha=alpha)
+```
+
+
 
 <div> 
 <center>
@@ -68,7 +76,9 @@ When \ C \ is \ 1000,\ θ \ is \quad [ 0.    \quad     -0.03061585\quad -1.05258
   0.        \quad  0.01181523 \quad 0.        ]
 $$
 
-​	According to the plot and all values we can know that the parameter set is no longer an array of zeros when C is larger than 100. As the value of C increases, the value of alpha decreases, which indicates a decrease in the strength of the penalty. We can notice that there are two parameters varied from 0 when C increased to 1, and the corresponding variables are  X<sub>0</sub> and X<sub>1</sub> . The other parameters remained to be 0 until C is larger than 100. Lasso regression restricts the redundant parameters, therefore the value of the parameters would have larger differences as the value of C increases. 
+​	According to the plot and all the parameter values we can know that most parameter values remaining to be 0 until C increases to 100. As the value of C increases, the value of alpha decreases, which indicates a decrease in the strength of the penalty. We can see that there are two parameter values are greater than 0 when C < 100, and the corresponding features are  X<sub>0</sub> <sup>2</sup>and X<sub>1</sub> . And our model only imply these two features which makes the model look like a plan, thus I think it's also an underfitting. In addition, after C > 100 there are more parameter values becomes greater than 0, which is a kind of overfitting.  Also the lasso regression restricts the redundant parameters, therefore parameter values will have larger differences as the value of C increases. 
+
+(c)  By using the test grid, a prediction surface is generated as below. The training samples proffer our knowledge about the real labels, therefore a good fit is equal to the training samples lying on the prediction surface. For better visualization, we generated a grid from -2 to 2. We are expecting a curvy surface, and from the graph, we can assert setting C to 100 gives us a good fit. On the other hand, when C is less than 1, the model failed to fit. Another piece of evidence is that all the parameters are 0 when C is too small. However, when C is too large, the surface becomes too curvy that it may lose generalizability. 
 
 <div> 
 <center>
@@ -76,12 +86,9 @@ $$
 </center>
 </div>
 
+(d) Underfitting means a model failed to fit on the training set, as it obtains little knowledge about the samples. The first two subplots in (c) show cases of underfitting. Conversely, overfitting indicates the model learned too much knowledge about the training set, thus it can only predict the specific set and has poor generalizability on the testing sets. For instance, the last two subplots in the last problem are visualizations for overfitting. In other words, underfitting has low variance but high bias, and results in a simple model; overfitting has a low bias but high variance and results in a very complex model. Either model is unsatisfying. To obtain a good fit, the strength of restriction should be moderate. Setting C to around 100 could provide us with a good fit for this dataset. 
 
-(c)  By using the test grid, a prediction surface is generated. The training samples proffer our knowledge about the real labels, therefore a good fit is equal to the training samples lying on the prediction surface. For better visualization, we generated a grid from -2 to 2. We are expecting a curvy surface, and from the graph, we can assert setting C to 1000 gives us a good fit. On the other hand, when C is less than 1, the model failed to fit. Another piece of evidence is that all the parameters are 0 when C is too small. However, when C is too large, the surface becomes too curvy that it may lose generalizability. 
-
-(d) Under-fitting means a model failed to fit on the training set, as it obtains little knowledge about the samples. The first two subplots in (c) show cases of under-fitting. Conversely, over-fitting indicates the model learned too much knowledge about the training set, thus it can only predict the specific set and has poor generalizability on the testing sets. For instance, the last two subplots in the last problem are visualizations for over-fitting. In other words, under-fitting has low variance but high bias, and results in a simple model; over-fitting has a low bias but high variance and results in a very complex model. Either model is unsatisfying. To obtain a good fit, the strength of restriction shall be moderate. Setting C to around 1000 could provide us with a good fit for this project. 
-
-(e) The following graph shows the value of parameters as C varies. It can be observed that when applying ridge regression, the parameter set will not be an array of zeros even if C is very small, and every parameter are expanding when the value of C increases. Moreover, the value of parameters changes more smoothly. The similarity between the parameter sets trained by the two approaches is that they share a similar overall evolution trend. 
+(e) The following graph shows the parameter values as C varies. It can observe that when applying ridge regression, most parameter values are not zero even if C is very small, and every parameter values are expanding when the value of C increases. Moreover, parameter values changes more smoothly. The similarity between the parameter values trained by the two approaches is that they share a similar overall increase trend. 
 
 <div> 
 <center>
@@ -142,7 +149,7 @@ When \ C \ is \ 1000, \ θ \ is\quad[ 0.      \quad    0.02539244\quad -1.031485
   0.03668072 \quad 0.21328246 \quad-0.00975813]
 $$
 
-The this graph contains subplots showing the prediction surfaces. A good fit is reached when C is larger than 1 but less than 10:
+This graph contains subplots showing the prediction surfaces. A good fit is reached when C is 1:
 
 <div> 
 <center>
@@ -155,7 +162,7 @@ The this graph contains subplots showing the prediction surfaces. A good fit is 
 
 ## (ii)
 
-(a) We keep using the previous C list for better comparison. With the assistant of the generated graph, we can see that the mean error has a descending trend. The standard deviation also shrinks as C increases. However, the mean error value suffers a slight rise when C is larger than 100. 
+(a) We keep using the previous C list for better comparison. According to the generated graph, we can see that the mean error has a descending trend. The standard deviation also shrinks as C increases. However, the mean error value has a steady trend when C is larger than 100. 
 
 <div> 
 <center>
@@ -165,9 +172,9 @@ The this graph contains subplots showing the prediction surfaces. A good fit is 
 
 
 
-(b) The mean value shows the average level of the error, while the standard deviation indicates the overall correctness in the prediction. If the standard deviation is large, then there may exist several outrageous predictions. On the other hand, a small standard deviation means the model has an average error level on every sample. Thus we should find a model which has a balanced mean and standard deviation of the prediction error on an independent test set to promise good performances. As what was shown in the last question, the minimum mean error was reached at C=100, and the standard deviation calculated on the test set is also small. In this case, we would recommend 100 as the final value of C.
+(b) The mean value shows the average level of the error, while the standard deviation indicates the overall correctness in the prediction. If the standard deviation is large, then there may exist several wrong predictions. On the other hand, a small standard deviation means the model has an average error level on every sample. Thus we should find a model which has a balanced mean and standard deviation of the prediction error on an independent test set to ensure good performances. As the graph shown in the last question, the minimum mean error was reached at C=100, and the standard deviation calculated on the test set is also small. In this case, I would recommend 100 as the final value of C.
 
-(c) Similarly, we tested on the previous C list using ridge regression. Using the standard we mentioned in the last problem, 1 shall be chosen as the final value of C, as it shows the least mean and standard deviation of the prediction error.
+(c) Similarly, we tested on the previous C list using ridge regression. Using the method we mentioned in the last problem, 1 should be the final value of C, as it shows the least mean and standard deviation of the prediction error.
 
 <div> 
 <center>
@@ -396,4 +403,3 @@ plt.ylabel("Value")
 plt.title("Mean and Standard Deviation of MSE vs C (Ridge)")
 plt.show()
 ```
-
