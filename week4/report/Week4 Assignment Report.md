@@ -4,7 +4,7 @@
 
 ## (i)
 
-(a) Accuracy and precision are metrics for evaluating a classification model. We could use accuracy as the measuring metric, as accuracy considers the overall result including both positive and negative classes. We choose the hyperparameter C from a list [0.01, 0.1, 1, 10, 100, 1000], and the maximum order of polynomials from [1, 2, 3, 5]. The best classifier shall have a high mean value of accuracy, while the standard deviation shall not be large. A small standard deviation indicates the model is robust on different datasets. For reproduction, we set all the random states to 0. Then we can generate a cross-validation graph as below:
+(a) Accuracy and precision are important for evaluating a classification model. We could use accuracy as the measuring metric, as accuracy considers the overall result including both positive and negative classes. We choose the hyperparameter C from a list [0.01, 0.1, 1, 10, 100, 1000], and the order of polynomials from [1, 2, 3, 5]. The better classifier should have a higher mean value of accuracy, while the standard deviation can not be too large. A small standard deviation indicates the model is stable on different datasets. For reproduction, we can set the random states to 0. Then we can generate a cross-validation graph as below:
 
 <div> 
 <center>
@@ -12,7 +12,7 @@
 </center>
 </div> 
 
-​	As the graph shows, the mean value of the accuracy score has little difference between different maximum orders of polynomials selected when C is larger than 1. And we can also tell that the minimum standard deviation is reached by the model with poly=5 and C=100. Therefore, this model should be selected as the final model for classification, and then we can plot the prediction results as:
+​	As the graph shows, the mean value of the accuracy score has little difference between different polynomials selected when C is larger than 1. And we can also tell that the minimum standard deviation is reached by the model with poly=5 and C=100. Therefore, this model should be selected as the final model for classification, and then we can plot the prediction results as:
 
 <div> 
 <center>
@@ -22,7 +22,7 @@
 
 ​	According the graph above the predictions and true labels are highly overlapped, indicating the model fits the dataset very well. 
 
-(b) Firstly set a value k from 1 to 15. Similar to the last problem, we need to find a model with a high mean accuracy and low standard deviation. Then we can know that 15 should be the best value for k  from the graph below:
+(b) We can set the value k from 1 to 30. Similar to the last problem, we need to find a model with a high mean accuracy and low standard deviation. Then we can know that 15 should be the best value for k  from the graph below:
 
 <div> 
 <center>
@@ -40,7 +40,7 @@
 
 ​	We know that the number of neighbors can't be too small or too large, otherwise the model will be overfitting, or randomly fit on the surrounding points, causing underfitting.
 
-(c) We can use a standard logistic classifier as the baseline model. The model is trained with the basic features and the hyperparameters are not tuned except for the random state. Then we can get the confusion matrix as below:
+(c) We can use a standard logistic classifier as the baseline model. The model will be trained with the basic features. Then we can get the confusion matrix as below:
 
 | Baseline                    | Pre y = 1     | Pre y = -1     |
 | --------------------------- | ------------- | -------------- |
@@ -61,13 +61,13 @@
 </center>
 </div> 
 
-(e) A confusion matrix can illustrate the number of samples wrongly classified. We have the confusion matrices from the problem(c). We can see the two models have more correct predictions than the baseline model, while the logistic classifier is slightly more accurate than the KNN model. When evaluating with ROC curves, we know that a model is more ideal when it has a curve closer to the position [0, 1], the point indicating 0% false positive with 100% true positive. According to the graph that both logistic and KNN models are closer to the point than the baseline model is. Moreover, KNN generated a curve that is closest to the ideal point. There is no significant difference between the two models, and I would suggest using a logistic classifier as it is slightly better than the KNN model. 
+(e) A confusion matrix can tell that the number of samples wrongly classified. We have the confusion matrices from the problem(c). We can see the two models have more correct predictions than the baseline model, while the logistic classifier is slightly more accurate than the KNN model. When evaluating with ROC curves, we know that a model is more ideal when it has a curve closer to the position [0, 1], the point indicating 0% false positive with 100% true positive. According to the graph that both logistic and KNN models are closer to the point than the baseline model is. Moreover, KNN generated a curve that is closest to the ideal point. And there is no significant difference between the two models, but I would suggest using a logistic classifier as it is slightly better than the KNN model. 
 
 
 
 ## (ii)
 
-(a) Using the same method as the question(i), get the cross-validation graph as below:
+(a) Using the same method as the question(i), obtain the cross-validation graph as below:
 
 <div> 
 <center>
@@ -99,7 +99,7 @@
 
 ​	And it's hard to say which model could perform better, as they both have low mean accuracies.
 
-(c) We keep using the standard logistic classifier as the baseline model. The model is trained with the basic features and the hyperparameters are not tuned except for the random state. Then we can get the confusion matrix as below:
+(c) We keep using the standard logistic classifier as the baseline model. The model will be trained with the basic features. Then we can get the confusion matrix as below:
 
 | Baseline                    | Pre y = 1     | Pre y = -1     |
 | --------------------------- | ------------- | -------------- |
@@ -120,7 +120,7 @@
 </center>
 </div> 
 
-(e) Although we don't know for sure which model is better to use from the first two problems. But the table from (c) and the graph from (d) can tell us the baseline model and the logistic classifier are making random predictions by classifying all the data into the negative class. The ROC curves of the two models also support this. In addition, the KNN model generates a curve closer to the ideal point, and several positive data are correctly classified. So I would suggest using KNN model for this dataset.
+(e) Although we don't know for sure which model is better to use from the first two problems. But the table from (c) and the graph from (d) can tell us the baseline model and the logistic classifier are making random predictions by classifying all the data into the negative class. The ROC curves of the two models also prove this. In addition, the KNN model generates a curve closer to the ideal point, and some positive data are correctly classified. So I would suggest using KNN model for this dataset.
 
 
 
@@ -265,7 +265,7 @@ plt.xlabel("X1")
 plt.ylabel("X2")
 plt.show()
 
-# For comparison, a standard logistic classifier is created with the basic features
+# For comparison, create a standard logistic classifier with the basic features
 baseline = LogisticRegression(random_state=0)
 baseline.fit(x_1, y_1)
 ypred_baseline = baseline.predict(x_1)
@@ -393,7 +393,7 @@ plt.xlabel("X1")
 plt.ylabel("X2")
 plt.show()
 
-# For comparison, a standard logistic classifier is created with the basic features
+# For comparison, create a standard logistic classifier with the basic features
 baseline = LogisticRegression(random_state=0)
 baseline.fit(x_2, y_2)
 ypred_baseline = baseline.predict(x_2)
